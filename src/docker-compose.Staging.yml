@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  apigateway:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Staging
+
+  identity:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Staging
+
+  um.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Staging
+
+  orders.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Staging
+
+  #webspa:
+  #  environment:
+  #    - ASPNETCORE_ENVIRONMENT=Staging

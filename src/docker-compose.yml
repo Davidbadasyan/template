@@ -1,0 +1,112 @@
+version: '3.4'
+
+services:
+  identity.sqldata:
+    container_name: identity.sqldata
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    user: root
+    ports:
+        - "1401:1433"
+    volumes:
+        - ./data/identity.sqldata/data:/var/opt/mssql/data
+        - ./data/identity.sqldata/log:/var/opt/mssql/log
+        - ./data/identity.sqldata/secrets:/var/opt/mssql/secrets
+    environment: 
+        - ACCEPT_EULA=Y
+        - SA_PASSWORD=Hello123!!
+
+
+  um.sqldata:
+    container_name: um.sqldata
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    user: root
+    ports:
+        - "1402:1433"
+    volumes:
+        - ./data/um.sqldata/data:/var/opt/mssql/data
+        - ./data/um.sqldata/log:/var/opt/mssql/log
+        - ./data/um.sqldata/secrets:/var/opt/mssql/secrets
+    environment: 
+        - ACCEPT_EULA=Y
+        - SA_PASSWORD=Hello123!!
+
+  orders.sqldata:
+    container_name: orders.sqldata
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    user: root
+    ports:
+        - "1403:1433"
+    volumes:
+        - ./data/orders.sqldata/data:/var/opt/mssql/data
+        - ./data/orders.sqldata/log:/var/opt/mssql/log
+        - ./data/orders.sqldata/secrets:/var/opt/mssql/secrets
+    environment: 
+        - ACCEPT_EULA=Y
+        - SA_PASSWORD=Hello123!!
+
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3.10-management
+    mem_limit: 256m
+    volumes:
+        - ./data/rabbitmq/data:/var/opt/rabbitmq/data
+    ports:
+        - "15672:15672" 
+        - "5672:5672" 
+
+  apigateway:
+    container_name: apigateway
+    image: apigateway:1.0.0
+    mem_limit: 256m
+    build:
+      context: .
+      dockerfile: Services/ApiGateways/ApiGateway.Web/Dockerfile
+    ports:
+        - "7000:80"
+
+
+  identity:
+    container_name: identity
+    image: identity:1.0.0
+    mem_limit: 256m
+    build:
+      context: .
+      dockerfile: Services/Identity/Identity.API/Dockerfile
+    depends_on:
+         - identity.sqldata
+         - rabbitmq
+
+
+  um.api:
+    container_name: um.api
+    image: umapi:1.0.0
+    mem_limit: 256m
+    build:
+      context: .
+      dockerfile: Services/UserManagement/UM.API/Dockerfile
+    depends_on:
+        - um.sqldata
+        - rabbitmq
+
+
+  orders.api:
+    container_name: orders
+    image: ordersapi:1.0.0
+    mem_limit: 256m
+    build:
+      context: .
+      dockerfile: Services/Orders/Orders.API/Dockerfile
+    depends_on:
+         - orders.sqldata
+         - rabbitmq
+
+
+  webspa:
+    container_name: webspa
+    image: webspa:1.0.0
+    build:
+      context: .
+      dockerfile: Web/webspa/Dockerfile
+    ports:
+        - "3000:5173"

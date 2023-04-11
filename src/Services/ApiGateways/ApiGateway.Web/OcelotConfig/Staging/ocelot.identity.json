@@ -1,0 +1,19 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/connect/token",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/identity/connect/token",
+      "UpstreamHttpMethod": [ "Post", "Options" ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://identity:80"
+  }
+}

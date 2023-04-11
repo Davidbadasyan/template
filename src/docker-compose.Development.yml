@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  apigateway:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  identity:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  um.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  orders.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  #webspa:
+  #  environment:
+  #    - ASPNETCORE_ENVIRONMENT=Development

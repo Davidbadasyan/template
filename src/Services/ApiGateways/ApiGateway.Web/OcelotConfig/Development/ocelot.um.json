@@ -1,0 +1,76 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/users/register",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7002"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/{version}/users/register",
+      "UpstreamHttpMethod": [ "Post", "Options" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/users/{userId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7002"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/{version}/users/{userId}",
+      "UpstreamHttpMethod": [ "Get", "Put", "Options" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "user"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/users/me",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7002"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/{version}/users/me",
+      "UpstreamHttpMethod": [ "Get", "Options" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "user"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/users/test",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7002"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/{version}/users/test",
+      "UpstreamHttpMethod": [ "Get", "Options" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "user"
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:7002"
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/orders/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7003"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/orders/",
+      "UpstreamHttpMethod": [ "Post", "Get", "Options" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "user"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/orders/{orderId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7003"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/orders/{orderId}",
+      "UpstreamHttpMethod": [ "Get", "Put", "Options" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "user"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/orders/lookups/paymentMethods",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7003"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/orders/lookups/paymentMethods",
+      "UpstreamHttpMethod": [ "Get", "Options" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "user"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/orders/lookups/shippingMethods",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7003"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/orders/lookups/shippingMethods",
+      "UpstreamHttpMethod": [ "Get", "Options" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "user"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/orders/lookups/weightUnits",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7003"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/orders/lookups/weightUnits",
+      "UpstreamHttpMethod": [ "Get", "Options" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "user"
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:7003"
+  }
+}
